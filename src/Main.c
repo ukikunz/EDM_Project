@@ -146,13 +146,13 @@ int main( void )
     int page = 0;
     int flag = 0;
     int Loop = 1;
-    Display_Printf("\n\n< Metronome >");
+    
     
     //_____________________________________________________________________________
     
     
     while(Loop){
-        
+        update_display(page);
         flag = getKey();
 
         if(flag == S1_SHORT){
