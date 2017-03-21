@@ -175,7 +175,10 @@ int main( void )
         if(flag == S1_LONG){
 
             Display_Printf("S1 Long");
-
+            
+            run_program( int page );
+            
+            
         }
 
         if(flag == S2_LONG){

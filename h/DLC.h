@@ -10,7 +10,7 @@
 
 
 void update_display( int pg );
-
+void run_program( int );
 
 
 #endif	/* DLC_H */

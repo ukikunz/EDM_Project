@@ -9,3 +9,13 @@ void update_display( int pg ){
         case 2: Display_Printf("\n\n< Drum Kit >"); break;
     }
 }
+
+void run_program( int n ){
+    
+    switch(n){
+        case 0: play_metronome(); break;
+        case 1: break;
+        case 2: break;
+    }
+    
+}
