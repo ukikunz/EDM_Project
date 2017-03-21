@@ -176,7 +176,7 @@ int main( void )
 
             Display_Printf("S1 Long");
             
-            run_program( int page );
+            run_program( page );
             
             
         }
