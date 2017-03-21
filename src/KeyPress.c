@@ -44,13 +44,13 @@ int getKey(void) {
             cTimer();
         }
     if(flag == 1){
-        if(hold < 5){
+        if(hold < 4){
             return(S1_SHORT);
         }
         else{return(S1_LONG);}
     }
     if(flag == 2){
-        if(hold < 5){
+        if(hold < 4){
             return(S2_SHORT);
         }
         else{return(S2_LONG);}

@@ -48,6 +48,7 @@
 #include "SoundCode.h"          // For functions to do with playing sounds
 #include "KeyPress.h"
 #include "DLC.h"
+#include "metronome.h"
 
 /************************************************************************
  Configuration Bits													
@@ -176,7 +177,9 @@ int main( void )
 
             Display_Printf("S1 Long");
             
-            run_program( page );
+            switch(page){
+                case 0: play_metronome(); break;
+            }
             
             
         }
