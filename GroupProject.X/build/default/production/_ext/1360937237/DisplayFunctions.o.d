@@ -1,0 +1,26 @@
+build/default/production/_ext/1360937237/DisplayFunctions.o:  \
+ ../src/DisplayFunctions.c  \
+../h/Main.h  \
+ ../Graphics/Include/GenericTypeDefs.h  \
+../h/HardwareProfile.h  \
+ ../h/GraphicsConfig.h  \
+../Graphics/Include/Graphics/SH1101A.h  \
+ ../Graphics/Include/Graphics/Graphics.h  \
+../h/GraphicsConfig.h  \
+ ../Graphics/Include/Graphics//Primitive.h  \
+ ../Graphics/Include/Graphics//ScanCodes.h  \
+ ../Graphics/Include/Graphics//GOL.h  \
+ ../Graphics/Include/Graphics//StaticText.h  \
+ ../Graphics/Include/Graphics//Slider.h  \
+ ../Graphics/Include/Graphics//Picture.h  \
+ ../Graphics/Include/Graphics//RoundDial.h  \
+ ../Graphics/Include/Graphics//Grid.h  \
+../h/Accelerometer.h  \
+../h/Utility.h  \
+ ../h/SK_PIC24H.h  \
+../h/p24HJ128GP504.h  \
+../h/Timer4Code.h  \
+../h/utility.h  \
+ ../h/Speaker.h  \
+../h/G711.h  \
+../h/DisplayFunctions.h 
