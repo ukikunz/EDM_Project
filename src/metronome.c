@@ -37,6 +37,70 @@ void play_metronome(void) {
             return ;
     }
     
+    int tempo;
+    int mark=0;
+    int counter=0;
+    int i;
+    TickInit();
+    while(1){
+        Initializetimer();
+         speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
+        if(speed==0)
+            tempo=6;
+        
+        if(speed==1)
+            tempo=4;
+        
+        if(speed==2)
+            tempo=3;
+
+      
+        for(i=0;i<tempo;i++){
+            while(TMR1<PR1){                            //make PR1 = 15475
+                if(SWITCH_S1 == 0 && mark != 2){
+                    counter = 1;
+                    mark = 1;
+                }
+                    
+                if(SWITCH_S2 == 0 && mark!=1){
+                    counter = 2;
+                    mark = 2;
+                }
+                
+                if(SWITCH_S2 == 0 && mark==2 && i == 3){
+                    return;
+                }
+                    
+            }
+        }
+        
+       
+        
+        if(mark == 1)
+            speed--;
+        if(mark == 2)
+            speed++;
+            
+        switch (speed){
+            case 0: Display_ClearScreen();
+                Display_Printf("Speed\nAndante"); break;
+                
+            case 1: Display_ClearScreen();
+                Display_Printf("Speed\nAllegro"); break;
+                
+            case 2: Display_ClearScreen();
+                Display_Printf("Speed\nPresto"); break; 
+        }            
+    }
+            
+        
+        
+            
+        
+        
+        
+    
+    
     
     
     return ;
@@ -66,7 +130,7 @@ void play_metronome(void) {
 }
 
 
-int SelectSpeed(void){
+int SelectSpeed(){
     int x,y=1;
     int press_flag = 0;
     Display_Printf("Speed\nAllegro");
@@ -178,4 +242,12 @@ int SelectTimeSignature(void){
     }
     
     return y;
+}
+
+void Initializetimer(void)
+{
+          T1CONbits.TON = 0;      // Stop timer
+          TMR1 = 0;               // Start value for the counter
+          PR1 = 61900;			// Value timer counts to
+          T1CONbits.TON = 1;      // Run timer
 }
