@@ -49,6 +49,7 @@
 #include "KeyPress.h"
 #include "DLC.h"
 #include "metronome.h"
+#include "drum1.h"
 
 /************************************************************************
  Configuration Bits													
@@ -179,6 +180,8 @@ int main( void )
             
             switch(page){
                 case 0: play_metronome(); break;
+                case 1:
+                case 2: play_drum(); break;
             }
             
             
