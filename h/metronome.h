@@ -9,7 +9,7 @@ extern "C" {
 void play_metronome(void);
 int SelectTimeSignature(void);
 int SelectSpeed(void);
-    
+void Initializetimer(void);
     
     
     
