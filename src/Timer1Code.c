@@ -30,13 +30,13 @@ extern int T1IntCalled;	// the 'extern' means the variable is created elsewhere
 void TickInit( void )
 {
     TMR1 = 0;
-    PR1 = TIMER_PERIOD;
+    PR1 = 15475;
 
    	T1CON = TIMER_ON | STOP_TIMER_IN_IDLE_MODE | TIMER_SOURCE_INTERNAL |
        	    GATED_TIME_DISABLED | TIMER_16BIT_MODE | TIMER_PRESCALER;
 
 
-	T1CONbits.TCKPS = 0; 			//Set the prescaler to be 1:1
+	T1CONbits.TCKPS = 3; 			//Set the prescaler to be 1:1
     IFS0bits.T1IF = 0;              //Clear flag
     IEC0bits.T1IE = 1;              //Enable interrupt
     T1CONbits.TON = 1;              //Run timer
