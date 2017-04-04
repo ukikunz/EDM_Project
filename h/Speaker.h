@@ -81,6 +81,7 @@
 #define SPEECH_SIZE_SNAKE_EAT		1024L
 #define SPEECH_SIZE_JET				31233L
 #define SPEECH_SIZE_SELECT			513L
+#define SPEECH_SIZE_METRONOME1      2562L
 
 #define SPEECH_ADDR_WELCOME			__builtin_tbladdress(G711_Welcome)
 #define SPEECH_ADDR_PRESS_SWITCH	__builtin_tbladdress(G711_PressSwitch)
@@ -96,6 +97,7 @@
 #define SPEECH_ADDR_SNAKE_EAT		__builtin_tbladdress(G711_SnakeEat)
 #define SPEECH_ADDR_JET				__builtin_tbladdress(G711_Jet)
 #define SPEECH_ADDR_SELECT			__builtin_tbladdress(G711_Select)
+#define SPEECH_ADDR_METRONOME1		__builtin_tbladdress(G711_metronome1)
 
 /************************************************************************
  Function Prototypes													
@@ -113,6 +115,7 @@ extern void G711_SnakeMove();
 extern void G711_SnakeEat();
 extern void G711_Jet();
 extern void G711_Select();
+extern void G711_metronome1();
 
 void speakerInit(void);
 void speakerActivate(long SpeechSegment, long SpeechSegmentSize);

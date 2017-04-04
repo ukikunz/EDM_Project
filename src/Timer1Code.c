@@ -30,7 +30,7 @@ extern int T1IntCalled;	// the 'extern' means the variable is created elsewhere
 void TickInit( void )
 {
     TMR1 = 0;
-    PR1 = 15475;
+    PR1 = 61900;
 
    	T1CON = TIMER_ON | STOP_TIMER_IN_IDLE_MODE | TIMER_SOURCE_INTERNAL |
        	    GATED_TIME_DISABLED | TIMER_16BIT_MODE | TIMER_PRESCALER;
