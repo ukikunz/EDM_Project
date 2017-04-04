@@ -12,33 +12,22 @@ void play_drum(){
     
     while(Loop){
         
-        flag = getKey();
-        
-        if(flag == S1_SHORT){
-            
-            speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-            
-        }
+        if(SWITCH_S1 == 0 || SWITCH_S2 == 0){
+            flag = getKey();
 
-        if(flag == S2_SHORT){
-            
-            speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-            
-        }
+            if(flag <= S2_SHORT){
+                speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
+            }
 
-        if(flag == S1_LONG){
+            if(flag == S1_LONG){
+                record_drum();
+                Display_Printf("\n\nPLAY DRUM KIT");
+            }
 
-            record_drum();
-            Display_Printf("\n\nPLAY DRUM KIT");
-            
-        }
-
-        if(flag == S2_LONG){
-
-            Loop = 0;
-
+            if(flag == S2_LONG){
+                Loop = 0;
+            }
         }
         
     }
-    
 }
