@@ -29,6 +29,7 @@ void play_drum(){
         if(flag == S1_LONG){
 
             record_drum();
+            Display_Printf("\n\nPLAY DRUM KIT");
             
         }
 

@@ -21,6 +21,9 @@ int getKey(void) {
     int flag = 0;
     int hold = 0;
     int i = 0;
+    
+    int hold_duration = 5;
+    
     for ( i = 0 ; i <= 5 ; i++ )
         {
             // we loop until the timer counter (TMR1) = PR1
@@ -44,13 +47,13 @@ int getKey(void) {
             cTimer();
         }
     if(flag == 1){
-        if(hold < 4){
+        if(hold < hold_duration){
             return(S1_SHORT);
         }
         else{return(S1_LONG);}
     }
     if(flag == 2){
-        if(hold < 4){
+        if(hold < hold_duration){
             return(S2_SHORT);
         }
         else{return(S2_LONG);}
