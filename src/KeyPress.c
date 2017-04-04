@@ -22,7 +22,7 @@ int getKey(void) {
     int hold = 0;
     int i = 0;
     
-    int hold_duration = 5;
+    int hold_duration = 4;
     
     for ( i = 0 ; i <= 5 ; i++ )
         {
@@ -72,3 +72,17 @@ void cTimer(void){
     PR1 = 61900;			// Value timer counts to
     T1CONbits.TON = 1;      // Run timer
 }
+
+/*
+ 
+ for ( i = 0 ; i <= 5 ; i++ )
+    {
+        // we loop until the timer counter (TMR1) = PR1
+        while (TMR1 < PR1 )
+        {
+            ......
+        }
+        cTimer();
+    }
+ 
+ */

@@ -4,52 +4,50 @@
 #include "KeyPress.h"
 
 void record_drum(){
+    Display_Printf("\n\nRECORD DRUM KIT");
+    int i, key = 0, flag;
+    int loop = 1;
+    int time1[50];
+    int hold = 0;
     
-    Display_Printf("\n\nRecording ..");
-    int Loop = 1;
-    int flag;
-    int i;
-    int key_count = 1;
-    int delay[100];
-
-    flag = getKey();
-    if(flag < 5){
-        speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-        delay[0] = 0;
-        while(Loop){
-
-            for ( i = 0 ; i <= 5 ; i++ )
-            {
-                // we loop until the timer counter (TMR1) = PR1
-                while (TMR1 < PR1 )
-                {
-                    flag = getKey();
-                    if(flag < 5){
-                        speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-                        key_count++;
-                    }
-                    if(flag > 5){
-                        Loop = 0;
-                    }
-                }
-                cTimer();
-            }
-
-        }
-        //play recorded sound
-        if(flag == S2_LONG){}
-
-        if(flag == S1_LONG){
-            Display_Printf("\n\nPlaying ..");
-            for(i = 0; i < key_count; i++){
+    while(loop){
+        
+        hold++;
+        Delay(10);
+        if(SWITCH_S1 == 0 || SWITCH_S2 == 0){
+            flag = getKey();
+            if(flag <= S2_SHORT){
                 speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-                for ( i = 0 ; i <= delay[key_count] ; i++ )
-                {
-                    cTimer();
-                }
+                time1[key] = hold;
+                hold = 0;
+                key++;
             }
-
-        } 
-    
+            if(flag >= S1_LONG){
+                time1[key] = hold;
+                loop = 0;
+            }
+        }
+        
+    }
+    int modifier = 30;
+    Display_Printf("\n\nPLAYING FROM RECORD");
+    loop = 1;
+    while(loop){
+        
+        for(i = 1; i <= key; i++){
+            speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
+            if(SWITCH_S1 == 0 || SWITCH_S2 == 0){
+               return;
+            }
+            Delay((time1[i]*modifier)/2);
+            
+        }
+         for(i=0;i<100;i++){
+                Delay(5);
+                if(SWITCH_S1 == 0 || SWITCH_S2 == 0){
+                            return;
+                }
+         }
+        
     }
 }
