@@ -13,123 +13,94 @@
 #include "KeyPress.h"
 
 void play_metronome(void) {
-    //Sound_Init(&PORTC,2);
-    int timesignature=0 ,speed=0, returnvalue;
+    int timesignature=0 ,speed=0, returnvalue1, returnvalue;
     int exitflag = 0;
-    while(1){
-        
-        if(exitflag != 1){
-            returnvalue = SelectTimeSignature();
-            timesignature = returnvalue /10;
-            exitflag = returnvalue %10;
-        }
-        
-        if(exitflag != 1){
-            returnvalue = SelectSpeed();
-            speed = returnvalue /10;
-            exitflag = returnvalue %10;
-        }
-        
-        if(timesignature!=0 && speed!= 0)
-            break;
-        
-        if(exitflag == 1)
+    returnvalue1 = SelectTimeSignature();
+    timesignature = returnvalue1 /10;
+    exitflag = returnvalue1 %10;
+    if(exitflag == 1)
             return ;
-    }
+    returnvalue = SelectSpeed();
+    speed = returnvalue /10;
+    exitflag = returnvalue %10;
+    if(exitflag == 1)
+            return ;
     
     int tempo;
     int mark=0;
-    int counter=0;
-    int i;
-    TickInit();
-    while(1){
-        Initializetimer();
-         speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-        if(speed==0)
-            tempo=6;
-        
-        if(speed==1)
-            tempo=4;
-        
-        if(speed==2)
-            tempo=3;
+    int change=0;
+    int i,tick=0;
 
-      
-        for(i=0;i<tempo;i++){
-            while(TMR1<PR1){                            //make PR1 = 15475
-                if(SWITCH_S1 == 0 && mark != 2){
-                    counter = 1;
-                    mark = 1;
-                }
-                    
-                if(SWITCH_S2 == 0 && mark!=1){
-                    counter = 2;
-                    mark = 2;
-                }
-                
-                if(SWITCH_S2 == 0 && mark==2 && i == 3){
-                    return;
-                }
-                    
-            }
+    
+    while(1){
+        if(speed == 1)
+            tempo=3;
+        
+        if(speed == 2)
+            tempo=2;
+        
+        if(speed == 3)
+            tempo=1;
+        
+        if(tick == 0){
+            speakerActivate(SPEECH_ADDR_METRONOME1, SPEECH_SIZE_METRONOME1);
+            Delay(50);
+            tick++;
+        }
+        else {
+            speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
+            Delay(50);
+            tick++;
         }
         
-       
-        
-        if(mark == 1)
+        if(tick == timesignature){
+            tick=0;
+        }
+        cTimer();
+        for(i=0;i<tempo;i++){
+           while(TMR1<PR1){                        
+                if(SWITCH_S1== 0&&mark ==0){
+                change = getKey();
+                mark =1;
+                }
+                if(SWITCH_S2== 0&&mark==0){
+                change = getKey();
+                mark =1;
+                }
+           }
+            
+        }
+        mark = 0;
+        if(change == S1_SHORT || change == S1_LONG)
             speed--;
-        if(mark == 2)
+        if(change == S2_SHORT)
             speed++;
+        if(change == S2_LONG)
+            return;
+        
+        
+        if(speed>3)
+            speed = 1;
+        if(speed<1)
+            speed = 3;
             
         switch (speed){
-            case 0: Display_ClearScreen();
+            case 1: Display_ClearScreen();
                 Display_Printf("Speed\nAndante"); break;
                 
-            case 1: Display_ClearScreen();
+            case 2: Display_ClearScreen();
                 Display_Printf("Speed\nAllegro"); break;
                 
-            case 2: Display_ClearScreen();
+            case 3: Display_ClearScreen();
                 Display_Printf("Speed\nPresto"); break; 
-        }            
+        }             
     }
-            
-        
-        
-            
-        
-        
-        
-    
-    
-    
-    
+
     return ;
-    /*
-    //char* TEXT;
-    char* SPEED_TEXT;
-    char* TIMESIG_TEXT;
-    */
-    
-    /*
-    switch(speed){
-        case 1: SPEED_TEXT = "Andante"; break;
-        case 2: SPEED_TEXT = "Allegro"; break;
-        case 3: SPEED_TEXT = "Presto"; break;
-    }
-    switch(timesignature){
-        case 1: TIMESIG_TEXT = "2/4";break;
-        case 2: TIMESIG_TEXT = "3/4";break;
-        case 3: TIMESIG_TEXT = "4/4";break;
-    }
-            
-    Display_2lines(SPEED_TEXT, TIMESIG_TEXT);      
-    
-    */
-    
-    
+
 }
 
-
+//--------------------------------------------------------------------------------------------
 int SelectSpeed(){
     int x,y=1;
     int press_flag = 0;
@@ -151,30 +122,30 @@ int SelectSpeed(){
             press_flag = 0;
         }
             
-        if(y<0)
-            y=2;
-        if(y>2)
-            y=0;
+        if(y<1)
+            y=3;
+        if(y>3)
+            y=1;
         
         switch (y){
-            case 0: Display_ClearScreen();
+            case 1: Display_ClearScreen();
                 Display_Printf("Speed\nAndante"); break;
                 
-            case 1: Display_ClearScreen();
+            case 2: Display_ClearScreen();
                 Display_Printf("Speed\nAllegro"); break;
                 
-            case 2: Display_ClearScreen();
+            case 3: Display_ClearScreen();
                 Display_Printf("Speed\nPresto"); break;  
         }
         
         if(x==S1_LONG && press_flag == 1){
-            y=y*10 + 1;
+            y=y*10 + 0;
             break;
         }
             
         
          if(x==S2_LONG && press_flag == 1){
-             y=y*10 + 0;
+             y=y*10 + 1;
              break;
          }
             
@@ -183,9 +154,9 @@ int SelectSpeed(){
     
     return y;
 }
-
+//------------------------------------------------------------------------------------------------
 int SelectTimeSignature(void){
-    int x = 0,y=2 ,loop = 1;
+    int x = 0,y=4 ,loop = 1;
     int press_flag=0;
     Display_Printf("SelectTimeSignature\n4/4");
     Delay(100);
@@ -195,8 +166,6 @@ int SelectTimeSignature(void){
              x = getKey();
              press_flag = 1;
         }
-        if(x==0)
-            press_flag = 0;
        
         if(x==S1_SHORT&& press_flag == 1){
             y--;
@@ -209,31 +178,31 @@ int SelectTimeSignature(void){
         }
             
         
-        if(y<0)
+        if(y<2)
+            y=4;
+        if(y>4)
             y=2;
-        if(y>2)
-            y=0;
         
         switch (y){
-            case 0: Display_ClearScreen();
+            case 2: Display_ClearScreen();
                 Display_Printf("SelectTimeSignature\n2/4"); Delay (100); 
                     break;
-            case 1: Display_ClearScreen();
+            case 3: Display_ClearScreen();
                 Display_Printf("SelectTimeSignature\n3/4"); Delay(100); 
                     break;
-            case 2: Display_ClearScreen();
+            case 4: Display_ClearScreen();
                 Display_Printf("SelectTimeSignature\n4/4"); Delay(100); 
                     break;  
         }
         
         if(x==S1_LONG && press_flag == 1){
-            y=y*10 + 1;
+            y=y*10 + 0;
             loop = 0;
         }
             
         
          if(x==S2_LONG && press_flag == 1){
-             y=y*10 + 0;
+             y=y*10 + 1;
              loop = 0;
          }
             
