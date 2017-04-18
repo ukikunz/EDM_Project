@@ -13,34 +13,27 @@
 #include "KeyPress.h"
 
 void play_metronome(void) {
-    int timesignature=0 ,speed=0, returnvalue1, returnvalue;
+    int timesignature = 0, speed = 0, TimeSigReturn, SpeedReturn;
     int exitflag = 0;
-    returnvalue1 = SelectTimeSignature();
-    timesignature = returnvalue1 /10;
-    exitflag = returnvalue1 %10;
+    
+    TimeSigReturn = SelectTimeSignature();
+    timesignature = TimeSigReturn /10;
+    exitflag = TimeSigReturn %10;
     if(exitflag == 1)
             return ;
-    returnvalue = SelectSpeed();
-    speed = returnvalue /10;
-    exitflag = returnvalue %10;
+    SpeedReturn = SelectSpeed();
+    speed = SpeedReturn /10;
+    exitflag = SpeedReturn %10;
     if(exitflag == 1)
             return ;
     
-    int tempo;
     int mark=0;
     int change=0;
-    int i,tick=0;
+    int i=0, tick=0;
 
     
-    while(1){
-        if(speed == 1)
-            tempo=3;
+    while(1){       
         
-        if(speed == 2)
-            tempo=2;
-        
-        if(speed == 3)
-            tempo=1;
         
         if(tick == 0){
             speakerActivate(SPEECH_ADDR_METRONOME1, SPEECH_SIZE_METRONOME1);
@@ -57,7 +50,8 @@ void play_metronome(void) {
             tick=0;
         }
         cTimer();
-        for(i=0;i<tempo;i++){
+        for(i=0;i<speed;i++){
+            TMR1=0;
            while(TMR1<PR1){                        
                 if(SWITCH_S1== 0&&mark ==0){
                 change = getKey();
@@ -68,13 +62,19 @@ void play_metronome(void) {
                 mark =1;
                 }
            }
-            
+           
         }
+        TickStop();
         mark = 0;
         if(change == S1_SHORT || change == S1_LONG)
-            speed--;
+             speed++;
+
+           
         if(change == S2_SHORT)
-            speed++;
+             speed--;
+
+        
+           
         if(change == S2_LONG)
             return;
         
@@ -83,17 +83,24 @@ void play_metronome(void) {
             speed = 1;
         if(speed<1)
             speed = 3;
-            
-        switch (speed){
-            case 1: Display_ClearScreen();
-                Display_Printf("Speed\nAndante"); break;
-                
-            case 2: Display_ClearScreen();
-                Display_Printf("Speed\nAllegro"); break;
-                
-            case 3: Display_ClearScreen();
-                Display_Printf("Speed\nPresto"); break; 
-        }             
+        
+        if(change != 0)
+        {
+                switch (speed){
+                    case 1: GOLInit();
+                        Display_Printf("Speed\nPresto"); break;
+
+                    case 2: GOLInit();
+                        Display_Printf("Speed\nAllegro"); break;
+
+                    case 3: GOLInit();
+                        Display_Printf("Speed\nAndante"); break;  
+                }
+        }
+        
+        change =0;
+        
+        
     }
 
     return ;
@@ -102,7 +109,7 @@ void play_metronome(void) {
 
 //--------------------------------------------------------------------------------------------
 int SelectSpeed(){
-    int x,y=1;
+    int x,y=2;
     int press_flag = 0;
     Display_Printf("Speed\nAllegro");
     Delay(100);
@@ -112,13 +119,13 @@ int SelectSpeed(){
              press_flag = 1;
         }
         if(x==S1_SHORT&& press_flag == 1){
-            y--;
+            y++;
             press_flag = 0;
         }
             
         
         if(x==S2_SHORT&& press_flag == 1){
-            y++;
+            y--;
             press_flag = 0;
         }
             
@@ -129,13 +136,13 @@ int SelectSpeed(){
         
         switch (y){
             case 1: Display_ClearScreen();
-                Display_Printf("Speed\nAndante"); break;
+                Display_Printf("Speed\nPresto"); break;
                 
             case 2: Display_ClearScreen();
                 Display_Printf("Speed\nAllegro"); break;
                 
             case 3: Display_ClearScreen();
-                Display_Printf("Speed\nPresto"); break;  
+                Display_Printf("Speed\nAndante"); break;  
         }
         
         if(x==S1_LONG && press_flag == 1){
