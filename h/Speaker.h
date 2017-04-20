@@ -68,7 +68,7 @@
 #define MAX_PWM_PERIOD				((GetInstructionClock()/FPWM)*TMRPRESCALE) - 1
 #define FPWM_FS_RATIO				(FPWM/FS) 
 
-//#define SPEECH_SIZE_WELCOME			40962L
+
 #define SPEECH_SIZE_PRESS_SWITCH	24321L
 #define SPEECH_SIZE_START			3585L
 #define SPEECH_SIZE_GAME			3330L
@@ -91,7 +91,6 @@
 #define SPEECH_SIZE_GTUNE                   8193L
 
 
-#define SPEECH_ADDR_WELCOME			__builtin_tbladdress(G711_Welcome)
 #define SPEECH_ADDR_PRESS_SWITCH	__builtin_tbladdress(G711_PressSwitch)
 #define SPEECH_ADDR_START			__builtin_tbladdress(G711_Start)
 #define SPEECH_ADDR_GAME			__builtin_tbladdress(G711_Game)
@@ -118,7 +117,7 @@
 /************************************************************************
  Function Prototypes													
  ************************************************************************/
-extern void G711_Welcome();
+
 extern void G711_PressSwitch();
 extern void G711_Start();
 extern void G711_Game();
