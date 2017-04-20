@@ -91,6 +91,7 @@
 #define SPEECH_SIZE_GTUNE                   8193L
 
 
+
 #define SPEECH_ADDR_PRESS_SWITCH	__builtin_tbladdress(G711_PressSwitch)
 #define SPEECH_ADDR_START			__builtin_tbladdress(G711_Start)
 #define SPEECH_ADDR_GAME			__builtin_tbladdress(G711_Game)
