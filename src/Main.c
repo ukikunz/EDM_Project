@@ -180,7 +180,7 @@ int main( void )
             
             switch(page){
                 case 0: play_metronome(); break;
-                case 1:
+                case 1: PlayTune(); break;
                 case 2: play_drum(); break;
             }
             

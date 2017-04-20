@@ -69,18 +69,8 @@
 #define FPWM_FS_RATIO				(FPWM/FS) 
 
 
-#define SPEECH_SIZE_PRESS_SWITCH	24321L
-#define SPEECH_SIZE_START			3585L
-#define SPEECH_SIZE_GAME			3330L
-#define SPEECH_SIZE_OVER			3585L 
-#define SPEECH_SIZE_TIMEOUT			6144L
-#define SPEECH_SIZE_PORTRAIT		4866L
-#define SPEECH_SIZE_LANDSCAPE		6144L
-#define SPEECH_SIZE_PLANE			4098L
-#define SPEECH_SIZE_SNAKE_MOVE		1281L
-#define SPEECH_SIZE_SNAKE_EAT		1024L
-#define SPEECH_SIZE_JET				31233L
-#define SPEECH_SIZE_SELECT			513L
+#define SPEECH_SIZE_START                   3585L
+#define SPEECH_SIZE_SELECT		513L
 #define SPEECH_SIZE_METRONOME1      2562L
 #define SPEECH_SIZE_ATUNE                   8193L
 #define SPEECH_SIZE_BTUNE                   8193L
@@ -91,19 +81,7 @@
 #define SPEECH_SIZE_GTUNE                   8193L
 
 
-
-#define SPEECH_ADDR_PRESS_SWITCH	__builtin_tbladdress(G711_PressSwitch)
-#define SPEECH_ADDR_START			__builtin_tbladdress(G711_Start)
-#define SPEECH_ADDR_GAME			__builtin_tbladdress(G711_Game)
-#define SPEECH_ADDR_OVER			__builtin_tbladdress(G711_Over)
-#define SPEECH_ADDR_TIMEOUT			__builtin_tbladdress(G711_Timeout)
-#define SPEECH_ADDR_UNKNOWN			__builtin_tbladdress(G711_Unknown)
-#define SPEECH_ADDR_PORTRAIT		__builtin_tbladdress(G711_Portrait)
-#define SPEECH_ADDR_LANDSCAPE		__builtin_tbladdress(G711_Landscape)
-#define SPEECH_ADDR_PLANE			__builtin_tbladdress(G711_Plane)
-#define SPEECH_ADDR_SNAKE_MOVE		__builtin_tbladdress(G711_SnakeMove)
-#define SPEECH_ADDR_SNAKE_EAT		__builtin_tbladdress(G711_SnakeEat)
-#define SPEECH_ADDR_JET				__builtin_tbladdress(G711_Jet)
+#define SPEECH_ADDR_START                           __builtin_tbladdress(G711_Start)
 #define SPEECH_ADDR_SELECT			__builtin_tbladdress(G711_Select)
 #define SPEECH_ADDR_METRONOME1		__builtin_tbladdress(G711_metronome1)
 #define SPEECH_ADDR_ATUNE                           __builtin_tbladdress(G711_Atune)
@@ -119,26 +97,16 @@
  Function Prototypes													
  ************************************************************************/
 
-extern void G711_PressSwitch();
 extern void G711_Start();
-extern void G711_Game();
-extern void G711_Over();
-extern void G711_Timeout();
-extern void G711_Portrait();
-extern void G711_Landscape();
-extern void G711_Plane();
-extern void G711_SnakeMove();
-extern void G711_SnakeEat();
-extern void G711_Jet();
 extern void G711_Select();
 extern void G711_metronome1();
-extern void Atune();
-extern void Btune();
-extern void Ctune();
-extern void Dtune();
-extern void Etune();
-extern void Ftune();
-extern void Gtune();
+extern void G711_Atune();
+extern void G711_Btune();
+extern void G711_Ctune();
+extern void G711_Dtune();
+extern void G711_Etune();
+extern void G711_Ftune();
+extern void G711_Gtune();
 
 void speakerInit(void);
 void speakerActivate(long SpeechSegment, long SpeechSegmentSize);
