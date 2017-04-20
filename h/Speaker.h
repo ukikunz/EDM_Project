@@ -68,7 +68,7 @@
 #define MAX_PWM_PERIOD				((GetInstructionClock()/FPWM)*TMRPRESCALE) - 1
 #define FPWM_FS_RATIO				(FPWM/FS) 
 
-#define SPEECH_SIZE_WELCOME			40962L
+//#define SPEECH_SIZE_WELCOME			40962L
 #define SPEECH_SIZE_PRESS_SWITCH	24321L
 #define SPEECH_SIZE_START			3585L
 #define SPEECH_SIZE_GAME			3330L
@@ -82,6 +82,14 @@
 #define SPEECH_SIZE_JET				31233L
 #define SPEECH_SIZE_SELECT			513L
 #define SPEECH_SIZE_METRONOME1      2562L
+#define SPEECH_SIZE_ATUNE                   8193L
+#define SPEECH_SIZE_BTUNE                   8193L
+#define SPEECH_SIZE_CTUNE                   8193L
+#define SPEECH_SIZE_DTUNE                   8193L
+#define SPEECH_SIZE_ETUNE                   8193L
+#define SPEECH_SIZE_FTUNE                   8193L
+#define SPEECH_SIZE_GTUNE                   8193L
+
 
 #define SPEECH_ADDR_WELCOME			__builtin_tbladdress(G711_Welcome)
 #define SPEECH_ADDR_PRESS_SWITCH	__builtin_tbladdress(G711_PressSwitch)
@@ -98,6 +106,14 @@
 #define SPEECH_ADDR_JET				__builtin_tbladdress(G711_Jet)
 #define SPEECH_ADDR_SELECT			__builtin_tbladdress(G711_Select)
 #define SPEECH_ADDR_METRONOME1		__builtin_tbladdress(G711_metronome1)
+#define SPEECH_ADDR_ATUNE                           __builtin_tbladdress(G711_Atune)
+#define SPEECH_ADDR_BTUNE                           __builtin_tbladdress(G711_Btune)
+#define SPEECH_ADDR_CTUNE                           __builtin_tbladdress(G711_Ctune)
+#define SPEECH_ADDR_DTUNE                           __builtin_tbladdress(G711_Dtune)
+#define SPEECH_ADDR_ETUNE                           __builtin_tbladdress(G711_Etune)
+#define SPEECH_ADDR_FTUNE                           __builtin_tbladdress(G711_Ftune)
+#define SPEECH_ADDR_GTUNE                           __builtin_tbladdress(G711_Gtune)
+
 
 /************************************************************************
  Function Prototypes													
@@ -116,6 +132,13 @@ extern void G711_SnakeEat();
 extern void G711_Jet();
 extern void G711_Select();
 extern void G711_metronome1();
+extern void Atune();
+extern void Btune();
+extern void Ctune();
+extern void Dtune();
+extern void Etune();
+extern void Ftune();
+extern void Gtune();
 
 void speakerInit(void);
 void speakerActivate(long SpeechSegment, long SpeechSegmentSize);
