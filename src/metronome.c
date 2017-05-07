@@ -37,12 +37,12 @@ void play_metronome(void) {
         
         if(tick == 0){
             speakerActivate(SPEECH_ADDR_METRONOME1, SPEECH_SIZE_METRONOME1);
-            Delay(50);
+            //Delay(50);
             tick++;
         }
         else {
             speakerActivate(SPEECH_ADDR_SELECT, SPEECH_SIZE_SELECT);
-            Delay(50);
+            //Delay(50);
             tick++;
         }
         
@@ -50,6 +50,8 @@ void play_metronome(void) {
             tick=0;
         }
         cTimer();
+          if(speed == 5)
+            speed = 7;
         for(i=0;i<speed;i++){
             TMR1=0;
            while(TMR1<PR1/3){                        
@@ -66,6 +68,8 @@ void play_metronome(void) {
            }
            
         }
+        if(speed == 7)
+            speed = 5;
         TickStop();
         mark = 0;
         if(change == S1_SHORT || change == S1_LONG)
@@ -80,22 +84,23 @@ void play_metronome(void) {
         if(change == S2_LONG)
             return;
         
+      
+        if(speed>5)
+            speed = 3;
+        if(speed<3)
+            speed = 5;
         
-        if(speed>4)
-            speed = 2;
-        if(speed<2)
-            speed = 4;
         
         if(change != 0)
         {
                 switch (speed){
-                    case 2: GOLInit();
+                    case 3: GOLInit();
                         Display_Printf("Speed\nPresto"); break;
 
-                    case 3: GOLInit();
+                    case 4: GOLInit();
                         Display_Printf("Speed\nAllegro"); break;
 
-                    case 4: GOLInit();
+                    case 5: GOLInit(); 
                         Display_Printf("Speed\nAndante"); break;  
                 }
         }
@@ -111,7 +116,7 @@ void play_metronome(void) {
 
 //--------------------------------------------------------------------------------------------
 int SelectSpeed(){
-    int x,y=3;
+    int x,y=4;
     int press_flag = 0;
     Display_Printf("Speed\nAllegro");
     Delay(100);
@@ -131,19 +136,19 @@ int SelectSpeed(){
             press_flag = 0;
         }
             
-        if(y<2)
-            y=4;
-        if(y>4)
-            y=2;
+        if(y<3)
+            y=5;
+        if(y>5)
+            y=3;
         
         switch (y){
-            case 2: Display_ClearScreen();
+            case 3: Display_ClearScreen();
                 Display_Printf("Speed\nPresto"); break;
                 
-            case 3: Display_ClearScreen();
+            case 4: Display_ClearScreen();
                 Display_Printf("Speed\nAllegro"); break;
                 
-            case 4: Display_ClearScreen();
+            case 5: Display_ClearScreen(); 
                 Display_Printf("Speed\nAndante"); break;  
         }
         
