@@ -52,14 +52,16 @@ void play_metronome(void) {
         cTimer();
         for(i=0;i<speed;i++){
             TMR1=0;
-           while(TMR1<PR1){                        
+           while(TMR1<PR1/3){                        
                 if(SWITCH_S1== 0&&mark ==0){
                 change = getKey();
                 mark =1;
+                tick=0;
                 }
                 if(SWITCH_S2== 0&&mark==0){
                 change = getKey();
                 mark =1;
+                tick=0;
                 }
            }
            
@@ -79,21 +81,21 @@ void play_metronome(void) {
             return;
         
         
-        if(speed>3)
-            speed = 1;
-        if(speed<1)
-            speed = 3;
+        if(speed>4)
+            speed = 2;
+        if(speed<2)
+            speed = 4;
         
         if(change != 0)
         {
                 switch (speed){
-                    case 1: GOLInit();
+                    case 2: GOLInit();
                         Display_Printf("Speed\nPresto"); break;
 
-                    case 2: GOLInit();
+                    case 3: GOLInit();
                         Display_Printf("Speed\nAllegro"); break;
 
-                    case 3: GOLInit();
+                    case 4: GOLInit();
                         Display_Printf("Speed\nAndante"); break;  
                 }
         }
@@ -109,7 +111,7 @@ void play_metronome(void) {
 
 //--------------------------------------------------------------------------------------------
 int SelectSpeed(){
-    int x,y=2;
+    int x,y=3;
     int press_flag = 0;
     Display_Printf("Speed\nAllegro");
     Delay(100);
@@ -135,13 +137,13 @@ int SelectSpeed(){
             y=1;
         
         switch (y){
-            case 1: Display_ClearScreen();
+            case 2: Display_ClearScreen();
                 Display_Printf("Speed\nPresto"); break;
                 
-            case 2: Display_ClearScreen();
+            case 3: Display_ClearScreen();
                 Display_Printf("Speed\nAllegro"); break;
                 
-            case 3: Display_ClearScreen();
+            case 4: Display_ClearScreen();
                 Display_Printf("Speed\nAndante"); break;  
         }
         
