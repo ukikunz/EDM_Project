@@ -69,11 +69,11 @@ void play_metronome(void) {
         TickStop();
         mark = 0;
         if(change == S1_SHORT || change == S1_LONG)
-             speed++;
+             speed--;
 
            
         if(change == S2_SHORT)
-             speed--;
+             speed++;
 
         
            
@@ -121,20 +121,20 @@ int SelectSpeed(){
              press_flag = 1;
         }
         if(x==S1_SHORT&& press_flag == 1){
-            y++;
+            y--;
             press_flag = 0;
         }
             
         
         if(x==S2_SHORT&& press_flag == 1){
-            y--;
+            y++;
             press_flag = 0;
         }
             
-        if(y<1)
-            y=3;
-        if(y>3)
-            y=1;
+        if(y<2)
+            y=4;
+        if(y>4)
+            y=2;
         
         switch (y){
             case 2: Display_ClearScreen();
@@ -177,12 +177,12 @@ int SelectTimeSignature(void){
         }
        
         if(x==S1_SHORT&& press_flag == 1){
-            y--;
+            y++;
             press_flag = 0;
         }
             
         if(x==S2_SHORT&& press_flag == 1){
-            y++;
+            y--;
             press_flag = 0;
         }
             
