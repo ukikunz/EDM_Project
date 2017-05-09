@@ -51,7 +51,7 @@ void play_metronome(void) {
         }
         cTimer();
           if(speed == 5)
-            speed = 7;
+            speed = 6;
         for(i=0;i<speed;i++){
             TMR1=0;
            while(TMR1<PR1/3){                        
@@ -68,7 +68,7 @@ void play_metronome(void) {
            }
            
         }
-        if(speed == 7)
+        if(speed == 6)
             speed = 5;
         TickStop();
         mark = 0;
@@ -95,13 +95,13 @@ void play_metronome(void) {
         {
                 switch (speed){
                     case 3: GOLInit();
-                        Display_Printf("Speed\nPresto"); break;
+                        Display_Printf("Speed\nPresto\n(150bpm)"); break;
 
                     case 4: GOLInit();
-                        Display_Printf("Speed\nAllegro"); break;
+                        Display_Printf("Speed\nAllegro\n(120bpm)"); break;
 
                     case 5: GOLInit(); 
-                        Display_Printf("Speed\nAndante"); break;  
+                        Display_Printf("Speed\nAndante\n(75bpm)"); break;  
                 }
         }
         
